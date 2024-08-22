@@ -83,7 +83,7 @@ function editCliente() {
                     Swal.fire({
                         icon:"success",
                         showConfirmButton:false,
-                        title:"El cliente ha sido ACTUALIZADO",
+                        title:"Se ha actualizado",
                         timer:1000
                     })
                     setTimeout(function() {
@@ -126,7 +126,7 @@ function MEliCliente(id){
                             icon:"error",
                             showConfirmButton:false,
                             title:'ERROR',
-                                text:'No pudimos eliminarlo',
+                                text:'No se pudo eliminar',
                             timer:1000
                         })
                     }
