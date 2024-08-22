@@ -1,41 +1,41 @@
 <form action="" id="FRegCliente">
     <div class="modal-header">
-        <h4 class="modal-title">Ingreso de Cliente</h4>
+        <h4 class="modal-title">Registro Nuevo Cliente</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body row">
+    <div class="modal-body">
 
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Razon Social</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="razon" id="razon">
+    <div class="form-group">
+        <label for="exampleInputBorder">Razón Social</label>
+        <input type="text" class="form-control" placeholder="" name="razon" id="razon">
     </div>
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">nit ci Cliente</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="nit" id="nit">
+    <div class="form-group">
+        <label for="exampleInputBorder">NIT</label>
+        <input type="text" class="form-control" placeholder="" name="nit" id="nit">
     </div>
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Direccion</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="direccion" id="direccion">
+    <div class="form-group">
+        <label for="exampleInputBorder">Dirección</label>
+        <input type="text" class="form-control" placeholder="" name="direccion" id="direccion">
     </div>
-    <div class="form-group col-sm-6">
+    <div class="form-group">
         <label for="exampleInputBorder">Nombre</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="nombre" id="nombre">
+        <input type="text" class="form-control" placeholder="" name="nombre" id="nombre">
     </div>
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Telefono</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="telefono" id="telefono">
+    <div class="form-group">
+        <label for="exampleInputBorder">Teléfono</label>
+        <input type="text" class="form-control" placeholder="" name="telefono" id="telefono">
     </div>
-    <div class="form-group col-sm-6">
+    <div class="form-group">
         <label for="exampleInputBorder">Email</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="email" id="email">
+        <input type="text" class="form-control" placeholder="" name="email" id="email">
     </div>
 
     </div>
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-outline-dark">Guardar</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </form>
 

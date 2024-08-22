@@ -23,12 +23,12 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Login</th>
-                    <th>Perfil</th>
-                    <th>Estado</th>
-                    <th>Ultimo acceso</th>
-                    <th>Fecha de registro</th>
-                    <th>Fecha de registro</th>
+                    <th>Razón Social</th>
+                    <th>NIT</th>
+                    <th>Dirección</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
                     <td>
                       <button class="btn btn-primary" onclick="MNuevoCliente()">Nuevo</button>
                     </td>
@@ -51,10 +51,10 @@
                         <td><?php echo $value["email_cliente"]; ?></td>
                         <td>
                           <div class="btn-group">
-                            <button class="btn btn-secundary" onclick="MEditCliente(<?php echo $value["id_cliente"]; ?>)">
+                            <button class="btn-secondary" onclick="MEditCliente(<?php echo $value["id_cliente"]; ?>)">
                               <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-danger" onclick="MEliCliente(<?php echo $value["id_cliente"]; ?>)">
+                            <button class="btn-danger" onclick="MEliCliente(<?php echo $value["id_cliente"]; ?>)">
                               <i class="fas fa-trash"></i>
                             </button>
                           </div>
