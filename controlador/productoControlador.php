@@ -28,11 +28,16 @@ class ControladorProducto{
 
     static public function ctrRegProducto(){
         require "../modelo/productoModelo.php";
-        $password=password_hash($_POST["password"], PASSWORD_DEFAULT);
+
         $data=array(
-            "loginProducto"=>$_POST["login"],
-            "password"=>$password,
-            "perfil"=>"Moderador"
+            "codProducto"=>$_POST["codp"],
+            "codProductoSin"=>$_POST["codps"],
+            "nombreProducto"=>$_POST["nombre"],
+            "precioProducto"=>$_POST["precio"],
+            "unidadMedida"=>$_POST["unidadm"],
+            "unidadMedidaSin"=>$_POST["unidadms"],
+            "imagenProducto"=>$_POST["imagen"],
+            "disponible"=>$_POST["disponible"]
         );
         $respuesta=ModeloProducto::mdlRegProducto($data);
 
@@ -50,36 +55,28 @@ class ControladorProducto{
 static function ctrEditProducto(){
     require "../modelo/productoModelo.php";
 
-if($_POST["password"]==$_POST["passActual"]){
-    $password=$_POST["password"];
-}
-else{
-    $password=password_hash($_POST["password"], PASSWORD_DEFAULT);
-}
-
-    
 
 
     $data=array(
-        "password"=>$password,
-        "id"=>$_POST["idProducto"],
-        "perfil"=>$_POST["perfil"],
-        "estado"=>$_POST["estado"]
+            "id"=>$_POST["idProducto"],
+            "codProducto"=>$_POST["codp"],
+            "codProductoSin"=>$_POST["codps"],
+            "nombreProducto"=>$_POST["nombre"],
+            "precioProducto"=>$_POST["precio"],
+            "unidadMedida"=>$_POST["unidadm"],
+            "unidadMedidaSin"=>$_POST["unidadms"],
+            "imagenProducto"=>$_POST["imagen"],
+            "disponible"=>$_POST["disponible"]
     );
 
     ModeloProducto::mdlEditProducto($data);
-
-/*     $respuesta=ModeloProducto::mdlEditProducto($data);
-
-    echo $respuesta; */
-
-
+    $respuesta=ModeloProducto::mdlEditProducto($data);
+    echo $respuesta; 
 }
 
 static function ctrEliProducto(){
     require "../modelo/productoModelo.php";
     $id=$_POST["id"];
-
     $respuesta= ModeloProducto::mdlEliProducto($id);
     echo $respuesta;
 }

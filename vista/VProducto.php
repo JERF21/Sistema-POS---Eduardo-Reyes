@@ -22,57 +22,51 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Razon Social</th>
-                    <th>NIT</th>
-                    <th>Direccion</th>
+                    <th>Código</th>
+                    <th>Código SIN</th>
                     <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th>Email</th>
+                    <th>Precio</th>
+                    <th>Unidad Medida</th>
+                    <th>Unidad Medida SIN</th>
+                    <th>Imagen</th>
+                    <th>Disponible</th>
                     <td>
                     <button class="btn btn-primary" onclick="MNuevoProducto()">Nuevo</button>
                     </td>
                   </tr>
                   </thead>
 
-               <tbody>
-               <?php
-                    $producto=ControladorProducto::ctrInfoProductos();
-foreach($producto as $value){
-  ?>
-
+                  <tbody>
+        <?php
+        $producto=ControladorProducto::ctrInfoProductos();
+          // var_dump($producto);
+        foreach($producto as $value){
+                      ?>
   <tr>
-    <td> <?php echo $value["id_producto"]; ?> </td>
-    <td> <?php echo $value["login_producto"]; ?> </td>
-    <td> <?php echo $value["perfil"]; ?> </td>
-    <td> <?php 
-    if ($value["estado"]==1){
-      ?>
-  <span class="badge badge-success">Activo</span>
-      <?php
-    }else{
-      ?>
-<span class="badge badge-danger">Inactivo</span>
-      <?php
-    } ?> </td>
-    <td> <?php echo $value["ultimo_login"]; ?> </td>
-    <td> <?php echo $value["fecha_registro"]; ?> </td>
+    <td><?php echo $value["id_producto"]; ?></td>
+    <td><?php echo $value["cod_producto"]; ?></td>
+    <td><?php echo $value["cod_producto_sin"]; ?></td>
+    <td><?php echo $value["nombre_producto"]; ?></td>                        
+    <td><?php echo $value["precio_producto"]; ?></td>
+    <td><?php echo $value["unidad_medida"]; ?></td>
+    <td><?php echo $value["unidad_medida_sin"]; ?></td>
+    <td><?php echo $value["imagen_producto"]; ?></td>
+    <td><?php echo $value["disponible"]; ?></td>
     <td>
       <div class="btn-group">
-        <button class="btn-secondary" onclick="MEditProducto(<?php echo $value["id_producto"];?>)">
+        <button class="btn-secondary" onclick="MEditProducto(<?php echo $value["id_producto"]; ?>)">
           <i class="fas fa-edit"></i>
         </button>
-        <button class="btn-danger" onclick="MEliProducto(<?php echo $value["id_producto"];?>)">
-          <i class="fas fa-trash"></i>
+        <button class="btn-danger" onclick="MEliProducto(<?php echo $value["id_producto"]; ?>)">
+           <i class="fas fa-trash"></i>
         </button>
-
       </div>
     </td>
   </tr>
-
-  <?php
-}
-               ?>
-               </tbody>
+                      <?php
+                    }
+                    ?>
+                  </tbody>
                    
                 </table>
               </div>

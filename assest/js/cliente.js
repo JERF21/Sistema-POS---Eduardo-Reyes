@@ -1,5 +1,5 @@
 function MNuevoCliente(){
-    $("#modal-xl").modal("show");
+    $("#modal-default").modal("show");
 
     var obj=""
     $.ajax({
@@ -7,7 +7,7 @@ function MNuevoCliente(){
         url:"vista/cliente/FNuevoCliente.php",
         data:obj,
         success:function(data){
-            $("#content-x1").html(data)
+            $("#content-default").html(data)
         }
     })
 }
@@ -52,7 +52,7 @@ function regCliente() {
 }
 
 function MEditCliente(id) {
-    $("#modal-warning").modal("show");
+    $("#modal-default").modal("show");
 
     var obj=""
     $.ajax({
@@ -60,7 +60,7 @@ function MEditCliente(id) {
         url:"vista/cliente/FEditCliente.php?id="+id,
         data:obj,
         success:function(data){
-            $("#content-warning").html(data)
+            $("#content-default").html(data)
         }
     })
 }
