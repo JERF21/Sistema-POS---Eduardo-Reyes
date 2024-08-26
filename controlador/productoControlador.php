@@ -28,16 +28,21 @@ class ControladorProducto{
 
     static public function ctrRegProducto(){
         require "../modelo/productoModelo.php";
+        $imagen=$_FILES["imgProducto"];
+        $imgNombre=$imagen["name"];
+        $imgTmp=$imagen["tmp_name"];
+        move_uploaded_file($imgTmp,"../assest/dist/img/productos/".$imgNombre);
+
 
         $data=array(
-            "codProducto"=>$_POST["codp"],
-            "codProductoSin"=>$_POST["codps"],
-            "nombreProducto"=>$_POST["nombre"],
-            "precioProducto"=>$_POST["precio"],
-            "unidadMedida"=>$_POST["unidadm"],
-            "unidadMedidaSin"=>$_POST["unidadms"],
-            "imagenProducto"=>$_POST["imagen"],
-            "disponible"=>$_POST["disponible"]
+            "codProducto"=>$_POST["codProducto"],
+            "codProductoSIN"=>$_POST["codProductoSIN"],
+            "desProducto"=>$_POST["desProducto"],
+            "preProducto"=>$_POST["preProducto"],
+            "unidadMedidad"=>$_POST["unidadMedidad"],
+            "unidadMedidadSIN"=>$_POST["unidadMedidadSIN"],
+            "codProducto"=>$_POST["codProducto"],
+            "imgProducto"=>$imgNombre,
         );
         $respuesta=ModeloProducto::mdlRegProducto($data);
 
@@ -55,21 +60,27 @@ class ControladorProducto{
 static function ctrEditProducto(){
     require "../modelo/productoModelo.php";
 
-
+    $imagen=$_FILES["imgProducto"];
+    if($imagen["name"]==""){
+    $imgNombre=$_POST["imgActual"];
+    }else{
+        $imgNombre=$imagen["name"];
+        $imgTmp=$imagen["tmp_name"];
+        move_uploaded_file($imgTmp,"../assest/dist/img/productos/".$imgNombre);
+    }
 
     $data=array(
-            "id"=>$_POST["idProducto"],
-            "codProducto"=>$_POST["codp"],
-            "codProductoSin"=>$_POST["codps"],
-            "nombreProducto"=>$_POST["nombre"],
-            "precioProducto"=>$_POST["precio"],
-            "unidadMedida"=>$_POST["unidadm"],
-            "unidadMedidaSin"=>$_POST["unidadms"],
-            "imagenProducto"=>$_POST["imagen"],
-            "disponible"=>$_POST["disponible"]
+        "idProducto"=>$_POST["idProducto"],
+        "codProductoSIN"=>$_POST["codProductoSIN"],
+        "desProducto"=>$_POST["desProducto"],
+        "preProducto"=>$_POST["preProducto"],
+        "unidadMedidad"=>$_POST["unidadMedidad"],
+        "unidadMedidadSIN"=>$_POST["unidadMedidadSIN"],
+        "estado"=>$_POST["estado"],
+        "imgProducto"=>$imgNombre,
     );
 
-    ModeloProducto::mdlEditProducto($data);
+
     $respuesta=ModeloProducto::mdlEditProducto($data);
     echo $respuesta; 
 }

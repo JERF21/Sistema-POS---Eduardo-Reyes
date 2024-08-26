@@ -51,10 +51,10 @@
                         <td><?php echo $value["email_cliente"]; ?></td>
                         <td>
                           <div class="btn-group">
-                            <button class="btn-secondary" onclick="MEditCliente(<?php echo $value["id_cliente"]; ?>)">
+                            <button class="btn btn-secondary" onclick="MEditCliente(<?php echo $value["id_cliente"]; ?>)">
                               <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn-danger" onclick="MEliCliente(<?php echo $value["id_cliente"]; ?>)">
+                            <button class="btn btn-danger" onclick="MEliCliente(<?php echo $value["id_cliente"]; ?>)">
                               <i class="fas fa-trash"></i>
                             </button>
                           </div>

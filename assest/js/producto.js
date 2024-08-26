@@ -1,5 +1,5 @@
 function MNuevoProducto(){
-    $("#modal-default").modal("show");
+    $("#modal-lg").modal("show");
    
     var obj="";
     $.ajax({
@@ -8,7 +8,7 @@ function MNuevoProducto(){
        url:"vista/producto/FNuevoProducto.php",
        data: obj,
        success: function(data) {
-           $("#content-default").html(data);
+           $("#content-lg").html(data);
        }
     })
    }
@@ -62,7 +62,7 @@ function regProducto(){
 
 function MEditProducto(id){
 
-    $("#modal-default").modal("show");
+    $("#modal-lg").modal("show");
    
     var obj="";
     $.ajax({
@@ -71,7 +71,7 @@ function MEditProducto(id){
        url:"vista/producto/FEditProducto.php?id="+id,
        data: obj,
        success: function(data) {
-           $("#content-default").html(data);
+           $("#content-lg").html(data);
        }
     })
 
@@ -196,4 +196,19 @@ var obj={
         }
     })
 
+}
+
+function MVerProducto(id){
+    $("#modal-lg").modal("show");
+   
+    var obj="";
+    $.ajax({
+   
+       type:"POST",
+       url:"vista/producto/MVerProducto.php?id="+id,
+       data: obj,
+       success: function(data) {
+           $("#content-lg").html(data);
+       }
+    })
 }

@@ -1,14 +1,14 @@
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
+ <!-- Main Footer -->
+ <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
       Un sistema de punto de venta
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014 <a href="https://aekesoft.net">Ekesoft</a>.</strong> Derechos reservados
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
 </div>
+<!-- ./wrapper -->
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
@@ -41,20 +41,30 @@
 <script src="assest/js/producto.js"></script>
 <script src="assest/js/factura.js"></script>
 
-<!------- /.
-seccion de modals 
- ------>
-
+<!--===============
+seccion de modals
+=================-->
 <div class="modal fade" id="modal-default">
-   <div class="modal-dialog">
-      <div class="modal-content">
-       <div id="content-default"></div>
-      </div>
-      <!-- /.modal-content -->
+  <div class="modal-dialog">
+    <div class="modal-content" id="content-default">
+
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
   </div>
-  <!-- /.modal -->
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+ 
+<div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" id="content-lg">
+            
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 
   <!-- jquery-validation -->
 <script src="assest/plugins/jquery-validation/jquery.validate.min.js"></script>

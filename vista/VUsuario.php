@@ -57,10 +57,10 @@ foreach($usuario as $value){
     <td> <?php echo $value["fecha_registro"]; ?> </td>
     <td>
       <div class="btn-group">
-        <button class="btn-secondary" onclick="MEditUsuario(<?php echo $value["id_usuario"];?>)">
+        <button class="btn btn-secondary" onclick="MEditUsuario(<?php echo $value["id_usuario"];?>)">
           <i class="fas fa-edit"></i>
         </button>
-        <button class="btn-danger" onclick="MEliUsuario(<?php echo $value["id_usuario"];?>)">
+        <button class="btn btn-danger" onclick="MEliUsuario(<?php echo $value["id_usuario"];?>)">
           <i class="fas fa-trash"></i>
         </button>
 
