@@ -40,6 +40,7 @@
        
       </div><!-- /.container-fluid -->
     </div>
+    </div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

@@ -8,7 +8,9 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-
+      <li class="nav-item nav-link">
+        <span class="badge badge-danger" id="comunSiat">Desconectado</span>
+      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -71,7 +73,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Clientes
                 <i class="right fas fa-angle-left"></i>
@@ -90,7 +92,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-box"></i>
               <p>
                 Productos
                 <i class="right fas fa-angle-left"></i>
@@ -119,7 +121,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Ventas
                 <i class="right fas fa-angle-left"></i>
@@ -128,7 +130,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="VFactura" class="nav-link">
+                <a href="FormVenta" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Emitir Factura</p>
                 </a>

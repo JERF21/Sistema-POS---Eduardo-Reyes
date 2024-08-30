@@ -138,10 +138,6 @@ $producto = ControladorProducto::ctrInfoProducto($id);
         unidadMedidadSIN: {
           required: true,
           minlength: 1,
-        },
-        imgProducto: {
-          required: true,
-          minlength: 1,
         }
       },
       errorElement: 'span',
