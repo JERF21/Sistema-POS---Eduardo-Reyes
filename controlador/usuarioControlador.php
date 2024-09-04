@@ -31,7 +31,7 @@ class ControladorUsuario{
                 echo "Este usuario no existe";
             } else {
                 if ($resultado==true) {
-                    $_SESSION["ingreso"] = $resultado["login_usuario"];
+                    $_SESSION["login"] = $resultado["login_usuario"];
                     $_SESSION["perfil"] = $resultado["perfil"];
                     $_SESSION["idUsuario"] = $resultado["id_usuario"];
                     $_SESSION["ingreso"] = "ok";
