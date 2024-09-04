@@ -118,6 +118,13 @@ foreach($cliente as $value){
     </div>
 </div>
 
+<!-- PANEL DE AVISOS -->
+ <div class="callout callout-info direct-chat-messanges" style="height:100px; width:290px">
+    <span class="list-unstyled" id="panelInfo">
+
+    </span>
+ </div>
+
     </div>
 </div>
     </div>
