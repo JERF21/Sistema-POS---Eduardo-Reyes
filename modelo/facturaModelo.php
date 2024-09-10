@@ -102,7 +102,7 @@ static public function mdlNuevoCufd($data){
     $cufd=$data["cufd"];
     $fechaVigCufd=$data["fechaVigCufd"];
     $codControlCufd=$data["codControlCufd"];
-    $stmt=Conexion::conectar()->prepare("insert into cufd(codigo_cufd, codigo_cufd, fecha_vigencia) values('$cufd', 
+    $stmt=Conexion::conectar()->prepare("insert into cufd(codigo_cufd, codigo_control, fecha_vigencia) values('$cufd', 
     '$codControlCufd', '$fechaVigCufd')");
 
     if($stmt->execute()){
@@ -112,19 +112,29 @@ static public function mdlNuevoCufd($data){
         return "error";
     }
 
-/*       $stmt->close();
+      $stmt->close();
     $stmt->null();
-*/
+
 }
 
 static public function mdlUltimoCufd(){
-    $stmt=Conexion::conectar()->prepare("select * from cufd where id_cufd =(select max(id_cufd) from cufd)");
+    $stmt=Conexion::conectar()->prepare("SELECT * FROM cufd WHERE id_cufd =(select max(id_cufd) from cufd)");
     $stmt->execute();
 
     return $stmt->fetch();
 
-/*   $stmt->close();
-    $stmt->null; */ 
+  $stmt->close();
+    $stmt->null; 
+}
+
+static public function mdlLeyenda(){
+    $stmt=Conexion::conectar()->prepare("SELECT * FROM leyenda order by rand() limit 1");
+    $stmt->execute();
+
+    return $stmt->fetch();
+
+  $stmt->close();
+    $stmt->null; 
 }
 
 }

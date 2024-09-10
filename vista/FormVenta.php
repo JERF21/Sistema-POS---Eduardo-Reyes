@@ -258,3 +258,13 @@ foreach($producto as $value){
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+<script>
+    setTimeout(()=>{
+        extraerLeyenda()
+    }, 6000)
+
+    setTimeout(()=>{
+        verificarVigenciaCufd()
+    }, 7000)
+</script>
