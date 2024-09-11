@@ -7,7 +7,8 @@ var nitEmpresa=338794023
 var rsEmpresa="NEOMAC SRL"
 var telEmpresa="9422560"
 var dirEmpresa="Calle Pucara 129 AVENIDA 7MO ANILLO NRO. 7550 ZONA/BARRIO: TIERRAS NUEVAS UV:0135 MZA:007"
-var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w"
+var token =
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w";
 var cufd;
 var codControlCufd;
 var fechaVigCufd;
@@ -196,98 +197,97 @@ function calcularTotal(){
 }
 
 /**obtencion de cufd */
-function solicitudCufd(){
+function solicitudCufd() {
   return new Promise((resolve, reject)=>{
-     
-    var obj={
-      codigoAmbiente:2,
-      codigoModalidad:2,
-      codigoPuntoVenta:0,
-      codigoPuntoVentaSpecified:true,
-      codigoSistema:codSistema,
-      codigoSucursal:0,
-      nit:nitEmpresa,
-      cuis:cuis
-    }
+    var obj = {
+      codigoAmbiente: 2,
+      codigoModalidad: 2,
+      codigoPuntoVenta: 0,
+      codigoPuntoVentaSpecified: true,
+      codigoSistema: codSistema,
+      codigoSucursal: 0,
+      nit: nitEmpresa,
+      cuis: cuis,
+    };
     $.ajax({
-      type:"POST",
-      url:host+"api/Codigos/solicitudCufd?token="+token,
-      data:JSON.stringify(obj),
-      cache:false,
-      contentType:"application/json",
-      sucess:function(data){
-        cufd=data["codigo"]
-        codControlCufd=data["codigoControl"]
-        fechaVigCufd=data["fechaVigencia"]
-        resolve(cufd)
-      }
-    })
-  })
-
-
+      type: "POST",
+      url: host + "api/Codigos/solicitudCufd?token=" + token,
+      data: JSON.stringify(obj),
+      cache: false,
+      contentType: "application/json",
+      success: function (data) {
+        cufd = data["codigo"];
+        codControlCufd = data["codigoControl"];
+        fechaVigCufd = data["fechaVigencia"];
+        resolve(cufd);
+      },
+    });
+  });
 }
+
 /**registrar nuevo cufd */
-function registrarNuevoCufd(){
-
-  solicitudCufd().then(ok=>{
-    if(ok!="" || ok!=null){
-
-      var obj={
-        "cufd":cufd,  
-        "fechaVigCufd":fechaVigCufd,
-        "codControlCufd":codControlCufd
-      }
-    
+function registrarNuevoCufd() {
+  solicitudCufd().then(ok => {
+    if (ok != ""  || ok!=null) {
+      var obj = {
+        cufd: cufd,
+        fechaVigCufd: fechaVigCufd,
+        codControlCufd: codControlCufd,
+      };
       $.ajax({
-        type:"POST",
-        data:obj,
-        url:"controlador/facturaControlador.php?ctrNuevoCufd",
-        cache:false,
-        success:function(data){
-
-          if(data=="ok"){
-          $("#panelInfo").before("<span class='text-primary'>CUFD REGISTRADO</span><br>")
+        type: "POST",
+        data: obj,
+        url: "controlador/facturaControlador.php?ctrNuevoCufd",
+        cache: false,
+        success: function (data) {
+        if (data == "ok") {
+          $("#panelInfo").append(
+            "<span class='text-primary'>CUFD registrado!!!</span><br>"
+          );
         }else{
-          $("#panelInfo").before("<span class='text-danger'>ERROR</span><br>")
+          $("#panelInfo").empty().append(
+            "<span class='text-danger'>Error de conexión: " + error + "</span><br>"
+          );
         }
-        
-      }
-      })
-
+        },
+        error: function (xhr, status, error) {
+        },
+      });
     }
-  })
-
-
+  });
 }
+
+
 /**verificar vigencia cufd */
-function verificarVigenciaCufd(){
-  let date=new Date()
-  var obj=""
+
+function verificarVigenciaCufd() {
+  let date = new Date();
+  var obj = "";
   $.ajax({
-    type:"POST",
-    url:"controlador/facturaControlador.php?ctrUltimoCufd",
-    data:obj,
-    cache:false,
-    dataType:"json",
-    success:function(data){
-
-      let vigCufdActual=new Date(data["fecha_vigencia"])
-
-      if(date.getTime()>vigCufdActual.getTime()){
-        $("#panelInfo").before("<span class='text-warning'>CUFD CADUCADO</span><br>")
-        $("#panelInfo").before("<span >Registrando CUFD...</span><br>")
-        registrarNuevoCufd()
-      }else{
-        $("#panelInfo").before("<span class='text-success'>CUFD Vigente, puede facturar</span><br>")
-
+    type: "POST",
+    url: "controlador/facturaControlador.php?ctrUltimoCufd",
+    data: obj,
+    cache: false,
+    dataType: "json",
+    success: function (data) {
+      let vigCufdActual = new Date(data["fecha_vigencia"]);
+      if (date.getTime() > vigCufdActual.getTime() || data == false) {
+        // agregar los mensajes y que despues de unos segundos se borren
+        $("#panelInfo").append(
+          "<span class='text-warning'>CUFD CADUCADO!!!</span><br>" +
+          "<span>Registrando cufd...</span><br>"
+        );
+        registrarNuevoCufd();
+      } else {
+        $("#panelInfo").append(
+          "<span class='text-success'>CUFD Vigente, puede facturar!!!</span><br>"
+        );
         cufd=data["codigo_cufd"]
         codControlCufd=data["codigo_control"]
-        fechaVigCufd=data["fecha_vigencia"]
+        fechaVigCufd=data["fecha_vigencia"] 
       }
-    }
-
-  })
-
+    },
+  });
 }
 
 /**obtener leyenda */
