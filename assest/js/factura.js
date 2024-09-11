@@ -211,7 +211,7 @@ function solicitudCufd() {
     };
     $.ajax({
       type: "POST",
-      url: host + "api/Codigos/solicitudCufd?token=" + token,
+      url: host+"api/Codigos/solicitudCufd?token="+token,
       data: JSON.stringify(obj),
       cache: false,
       contentType: "application/json",
@@ -241,13 +241,9 @@ function registrarNuevoCufd() {
         cache: false,
         success: function (data) {
         if (data == "ok") {
-          $("#panelInfo").append(
-            "<span class='text-primary'>CUFD registrado!!!</span><br>"
-          );
+          $("#panelInfo").append("<span class='text-primary'>CUFD REGISTRADO</span><br>");
         }else{
-          $("#panelInfo").empty().append(
-            "<span class='text-danger'>Error de conexión: " + error + "</span><br>"
-          );
+          $("#panelInfo").empty().append("<span class='text-danger'>Error de conexión: " + error + "</span><br>");
         }
         },
         error: function (xhr, status, error) {
@@ -273,15 +269,11 @@ function verificarVigenciaCufd() {
       let vigCufdActual = new Date(data["fecha_vigencia"]);
       if (date.getTime() > vigCufdActual.getTime() || data == false) {
         // agregar los mensajes y que despues de unos segundos se borren
-        $("#panelInfo").append(
-          "<span class='text-warning'>CUFD CADUCADO!!!</span><br>" +
-          "<span>Registrando cufd...</span><br>"
-        );
+        $("#panelInfo").append("<span class='text-warning'>CUFD CADUCADO</span><br>" +
+          "<span>Registrando cufd...</span><br>");
         registrarNuevoCufd();
       } else {
-        $("#panelInfo").append(
-          "<span class='text-success'>CUFD Vigente, puede facturar!!!</span><br>"
-        );
+        $("#panelInfo").append("<span class='text-success'>CUFD VIGENTE, PUEDE FACTURAR</span><br>");
         cufd=data["codigo_cufd"]
         codControlCufd=data["codigo_control"]
         fechaVigCufd=data["fecha_vigencia"] 
@@ -307,8 +299,35 @@ function extraerLeyenda(){
    })
 }
 
+/**validar formulario */
+function validarFormulario(){
+  let numFactura=document.getElementById("numFactura").value
+  let nitCliente=document.getElementById("nitCliente").value
+  let emailCliente=document.getElementById("emailCliente").value
+  let rsCliente=document.getElementById("rsCliente").value
+
+  if(numFactura==null || numFactura.length==0){
+    $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }else if(nitCliente==null || nitCliente.length==0){
+    $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }else if(emailCliente==null || emailCliente.length==0){
+    $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }else if(rsCliente==null || rsCliente.length==0){
+    $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }
+  return true
+}
+
+
 /**emitit factura */
 function emitirFactura(){
+  if(validarFormulario()==true){
+
+  
   let date=new Date()
   let numFactura=parseInt(document.getElementById("numFactura").value)
   let fechaFactura=date.toISOString()
@@ -363,9 +382,12 @@ function emitirFactura(){
         numeroTarjeta:null,
         montoTotal:subTotal,
         montoTotalSujetoIva:totApagar,
+        codigoMoneda:1,
+        tipoCambio:1,
+        montoTotalMoneda:totApagar,
         montoGiftCard:0,
         descuentoAdicional:descAdicional,
-        codigoExcepcion:"0",
+        codigoExcepcion:0,
         cafc:null,
         leyenda:leyenda,
         usuario:usuarioLogin,
@@ -374,4 +396,17 @@ function emitirFactura(){
       detalle:arregloCarrito
     }
   }
+  console.log(JSON.stringify(obj))
+  $.ajax({
+    type:"POST",
+    url:host+"api/CompraVenta/recepcion",
+    data:JSON.stringify(obj),
+    cache:false,
+    contentType:"application/json",
+    processData:false,
+    success:function(data){
+      console.log(data);
+    }
+  })
+}
 }
