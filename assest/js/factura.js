@@ -23,7 +23,7 @@ function verificarComunicacion(){
         url:host+"api/CompraVenta/comunicacion",
         data:obj,
         cache:false,
-        contentType:"apllication/json",
+        contentType:"application/json",
         processData:false,
         success:function(data){
             if(data["transaccion"]==true){
@@ -59,6 +59,7 @@ document.getElementById("emailCliente").value="null"
         document.getElementById("emailCliente").value=data["email_cliente"]  
     }
 document.getElementById("rsCliente").value=data["razon_social_cliente"]
+document.getElementById("idCliente").value=data["id_cliente"]
 numFactura()
 
 }
@@ -282,6 +283,19 @@ function verificarVigenciaCufd() {
   });
 }
 
+/**transformar fecha de formato de iso*/
+function transformarFecha(fechaISO){
+  let fecha_iso=fechaISO.split("T")
+  let hora_iso=fecha_iso[1].split(".")
+
+  let fecha=fecha_iso[0]
+  let hora=hora_iso[0]
+
+  let fecha_hora=fecha+" "+hora
+  return fecha_hora
+}
+
+
 /**obtener leyenda */
 function extraerLeyenda(){
    var obj=""
@@ -344,7 +358,7 @@ function emitirFactura(){
   let emailCliente=document.getElementById("emailCliente").value
 
   var obj={
-    codigodAmbiente:2,
+    codigoAmbiente:2,
     codigoDocumentoSector:1,
     codigoEmision:1,
     codigoModalidad:2,
@@ -394,9 +408,10 @@ function emitirFactura(){
         codigoDocumentoSector:1,
       },
       detalle:arregloCarrito
-    }
+    },
+    
   }
-  console.log(JSON.stringify(obj))
+  /* console.log(JSON.stringify(obj)) */
   $.ajax({
     type:"POST",
     url:host+"api/CompraVenta/recepcion",
@@ -405,8 +420,73 @@ function emitirFactura(){
     contentType:"application/json",
     processData:false,
     success:function(data){
-      console.log(data);
+      if(data["codigoResultado"]!=908){
+        $("#panelInfo").before("<span class='text-danger'>ERROR, FACTURA NO EMITIDA</span><br>")
+      }else{
+        $("#panelInfo").before("<span>REGISTRANDO FACTURA...</span><br>")
+        let datos={
+          codigoResultado:data["codigoResultado"],
+          codigoRecepcion:data["datoAdicional"]["codigoRecepcion"],
+          cuf:data["datoAdicional"]["cuf"],
+          sentDate:data["datoAdicional"]["sentDate"],
+          xml:data["datoAdicional"]["xml"],
+        }
+        registrarFactura(datos);
+      }
     }
   })
 }
+}
+
+function registrarFactura(datos){
+  let numFactura=document.getElementById("numFactura").value
+  let idCliente=document.getElementById("idCliente").value
+  let subTotal=parseFloat(document.getElementById("subTotal").value)
+  let descAdicional=parseFloat(document.getElementById("descAdicional").value)
+  let totApagar=parseFloat(document.getElementById("totApagar").value)
+  let fechaEmision=transformarFecha(datos["sentDate"])
+  let idUsuario=document.getElementById("idUsuario").value
+  let usuarioLogin=document.getElementById("usuarioLogin").innerHTML
+  let obj={
+    "codFactura":numFactura,
+    "idCliente":idCliente,
+    "detalle":JSON.stringify(arregloCarrito),
+    "neto":subTotal,
+    "descuento":descAdicional,
+    "total":totApagar,
+    "fechaEmision":fechaEmision,
+    "cufd":cufd,
+    "cuf":datos["cuf"],
+    "xml":datos["xml"],
+    "idUsuario":idUsuario,
+    "usuario":usuarioLogin,
+    "leyenda":leyenda,
+  }
+  /* console.log(JSON.stringify(obj)) */
+  $.ajax({
+    type:"POST",
+    url:"controlador/facturaControlador.php?ctrRegistrarFactura",
+    data:obj,
+    cache:false,
+    success:function(data){
+      if(data="ok"){
+        Swal.fire({
+          icon:"success",
+          showConfirmButton:false,
+          title:"Factura Registrada",
+          timer:1000
+        })
+        setTimeout(function(){
+          location.reload()
+        }, 1000)
+      }else{
+        Swal.fire({
+          icon:"error",
+          showConfirmButton:false,
+          title:"ERROR DE REGISTRO",
+          timer:1500
+        })
+      }
+    }
+  })
 }
