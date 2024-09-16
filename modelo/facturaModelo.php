@@ -5,7 +5,7 @@ class ModeloFactura{
 
     
 static public function mdlInfoFacturas(){
-        $stmt=Conexion::conectar()->prepare("SELECT id_factura, cod_factura, razon_social_cliente, fecha_emision, total, estado_factura
+        $stmt=Conexion::conectar()->prepare("SELECT id_factura, cod_factura, razon_social_cliente, fecha_emision, total, estado_factura, cuf
         FROM factura JOIN cliente ON cliente.id_cliente=factura.id_cliente");
         $stmt->execute();
 
@@ -69,9 +69,9 @@ static public function mdlEditFactura($data){
   */
 }
 
-static public function mdlEliFactura($id){
+static public function mdlAnularFactura($cuf){
 
-    $stmt=Conexion::conectar()->prepare("delete from factura where id_factura=$id");
+    $stmt=Conexion::conectar()->prepare("UPDATE factura SET estado_factura=0 WHERE cuf='$cuf'");
 
     if($stmt->execute()){
         return "ok";
