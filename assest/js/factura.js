@@ -14,7 +14,7 @@ var codControlCufd;
 var fechaVigCufd;
 var leyenda;
 
-
+/**verificar comunicacion API */
 function verificarComunicacion(){
     var obj=""
 
@@ -41,6 +41,7 @@ function verificarComunicacion(){
 
 setInterval(verificarComunicacion,3000)
 
+/**buscar cliente */
 function busCliente(){
     let nitCliente=document.getElementById("nitCliente").value
     var obj={
@@ -66,6 +67,7 @@ numFactura()
 })
 }
 
+/**num factura */
 function numFactura(){
 let obj=""
 $.ajax({
@@ -80,6 +82,7 @@ $.ajax({
 
 }
 
+/**buscar prod */
 function busProducto(){
     let codProducto=document.getElementById("codProducto").value
     var obj={
@@ -102,6 +105,7 @@ function busProducto(){
 
 }
 
+/**calcular prod */
 function calcularPreProd(){
     let cantPro=parseInt(document.getElementById("cantProducto").value)
     let descProducto=parseInt(document.getElementById("descProducto").value)
@@ -113,6 +117,8 @@ function calcularPreProd(){
 
 var arregloCarrito=[]
 var listaDetalle=document.getElementById("listaDetalle")
+
+/**agregar carrito */
 function agregarCarrito(){
 
   let actEconomica=document.getElementById("actEconomica").value
@@ -151,6 +157,7 @@ function agregarCarrito(){
 
 }
 
+/**tabla carrito */
 function dibujarTablaCarrito(){
   listaDetalle.innerHTML=""
   arregloCarrito.forEach((detalle)=>{
@@ -177,6 +184,7 @@ function dibujarTablaCarrito(){
   calcularTotal()
 }
 
+/**eliminar carrito */
 function eliminarCarrito(cod){
   arregloCarrito=arregloCarrito.filter((detalle)=>{
     if (cod!=detalle.codigoProducto) {
@@ -186,6 +194,7 @@ function eliminarCarrito(cod){
   dibujarTablaCarrito()
 }
 
+/**calcular total */
 function calcularTotal(){
   let totalCarrito=0
   for(var i=0; i<arregloCarrito.length;i++){
@@ -337,7 +346,7 @@ function validarFormulario(){
 }
 
 
-/**emitit factura */
+/**emitir factura */
 function emitirFactura(){
   if(validarFormulario()==true){
 
@@ -438,6 +447,7 @@ function emitirFactura(){
 }
 }
 
+/**registrar factura */
 function registrarFactura(datos){
   let numFactura=document.getElementById("numFactura").value
   let idCliente=document.getElementById("idCliente").value
@@ -489,4 +499,21 @@ function registrarFactura(datos){
       }
     }
   })
+}
+
+
+/**ver factura */
+function MVerFactura(id){
+  $("#modal-xl").modal("show");
+   
+  var obj="";
+  $.ajax({
+ 
+     type:"POST",
+     url:"vista/factura/MVerFactura.php?id="+id,
+     data: obj,
+     success: function(data) {
+         $("#content-xl").html(data);
+     }
+  })
 }

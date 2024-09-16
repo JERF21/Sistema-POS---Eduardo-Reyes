@@ -78,7 +78,8 @@ function MEditProducto(id){
 
 
     
-} //final
+} 
+
 function editProducto(){
 
     var formData=new FormData($("#FEditProducto")[0])
