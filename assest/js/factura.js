@@ -403,7 +403,7 @@ function emitirFactura(){
         codigoCliente:nitCliente,
         codigoMetodoPago:metPago,
         numeroTarjeta:null,
-        montoTotal:subTotal,
+        montoTotal:totApagar,
         montoTotalSujetoIva:totApagar,
         codigoMoneda:1,
         tipoCambio:1,
