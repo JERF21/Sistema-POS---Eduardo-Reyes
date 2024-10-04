@@ -117,4 +117,10 @@ static function ctrEliUsuario(){
     echo $respuesta;
 }
 
+static public function ctrCantidadUsuarios(){
+
+    $respuesta=ModeloUsuario::mdlCantidadUsuarios();
+    return ($respuesta);
+    //echo $respuesta;
+}
 }//final

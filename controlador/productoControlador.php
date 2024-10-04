@@ -101,4 +101,11 @@ static public function ctrBusProducto(){
     //echo $respuesta;
 }
 
+static public function ctrCantidadProductos(){
+
+    $respuesta=ModeloProducto::mdlCantidadProductos();
+    return ($respuesta);
+    //echo $respuesta;
+}
+
 }//final
